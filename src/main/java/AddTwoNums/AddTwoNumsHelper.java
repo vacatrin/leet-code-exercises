@@ -8,8 +8,17 @@ public class AddTwoNumsHelper {
 
         BigInteger firstNumber = generateNumberFromListNode(l1);
         BigInteger secondNumber = generateNumberFromListNode(l2);
+        BigInteger sumOfNumbers;
 
-        BigInteger sumOfNumbers = firstNumber.add(secondNumber);
+        if (firstNumber == null && secondNumber == null) {
+            return null;
+        } else if (firstNumber == null) {
+            return convertBigIntegerToListNode(secondNumber);
+        } else if (secondNumber == null) {
+            return convertBigIntegerToListNode(firstNumber);
+        }
+
+        sumOfNumbers = firstNumber.add(secondNumber);
 
         return convertBigIntegerToListNode(sumOfNumbers);
     }
@@ -45,8 +54,12 @@ public class AddTwoNumsHelper {
 
         return head;
     }
-
     private BigInteger generateNumberFromListNode(ListNode listNode) {
+
+        if (listNode == null) {
+
+            return null;
+        }
 
         if (listNode.next == null) {
 
