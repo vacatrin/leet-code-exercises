@@ -7,14 +7,18 @@ public class AddTwoNumsMain {
     public static void main(String[] args) {
 
         AddTwoNumsHelper helper = new AddTwoNumsHelper();
-//        ListNode l1 = generateFromNumber(342);
-//        ListNode l2 = generateFromNumber(465);
+//        ListNode l1 = generateFromNumber(new BigInteger("342"));
+//        ListNode l2 = generateFromNumber(new BigInteger("465"));
 
-        ListNode l1 = generateFromNumber(new BigInteger("9"));
-        ListNode l2 = generateFromNumber(new BigInteger("9999999991"));
+        ListNode l1 = generateFromNumber(new BigInteger("465"));
+        ListNode l2 = generateFromNumber(new BigInteger("1000000000000000000000000000001"));
 
         ListNode result = helper.addTwoNumbers(l1, l2);
 
+        displayListNodeResultDigits(result);
+    }
+
+    private static void displayListNodeResultDigits(ListNode result) {
         do {
             System.out.println(result.val);
             result = result.next;
@@ -26,23 +30,21 @@ public class AddTwoNumsMain {
         ListNode head = null;
         ListNode tail = null;
 
-        long numberLong = number.longValue();
+        while (number.compareTo(BigInteger.valueOf(0)) == 1) {
 
-        while (numberLong > 0) {
-
-            long digit = numberLong % 10;
+            BigInteger digit = number.mod(BigInteger.valueOf(10));
 
             if (head == null) {
 
-                head = new ListNode((int) digit);
+                head = new ListNode(digit.intValue());
                 tail = head;
             } else {
 
-                tail.next = new ListNode((int) digit);
+                tail.next = new ListNode(digit.intValue());
                 tail = tail.next;
             }
 
-            numberLong /= 10;
+            number = number.divide(BigInteger.valueOf(10));
         }
 
         return head;
